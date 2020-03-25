@@ -1,0 +1,528 @@
+	{
+		"title": "Dock Settings",
+		"description": "Preference Domain: com.apple.dock",
+		"__version": "1.0",
+		"__feedback": "josh@psu.edu",
+		"type": "object",
+		"options": {
+			"remove_empty_properties": true
+		},
+		"definitions": {
+			"policy_group": {
+				"type": "object",
+				"format": "grid",
+				"options": {
+					"collapsed": true,
+					"disable_properties": true
+				}
+			}
+		},
+		"properties": {
+			"static-apps": {
+				"title": "Persistent Applications",
+				"description": "This list of applications will appear on every user's dock. These items will also NOT be removable!",
+				"propertyOrder": 10,
+				"anyOf": [{
+						"type": "null",
+						"title": "Not Configured"
+					},
+					{
+						"title": "Configured",
+						"type": "array",
+						"items": {
+							"type": "object",
+							"title": "Application",
+							"properties": {
+								"tile-type": {
+									"type": "string",
+									"title": "Tile-Type",
+									"description": "The default value for this is \"file-type\"",
+									"enum": ["file-type"],
+									"options": {
+										"enum_titles": ["Default"]
+									}
+								},
+								"tile-data": {
+									"type": "object",
+									"title": "Dock Application",
+									"properties": {
+										"file-label": {
+											"type": "string",
+											"title": "Dock Application Name",
+											"description": "The name you'd like to display in the dock"
+										},
+										"file-data": {
+											"type": "object",
+											"title": "Dock Application Parameters",
+											"properties": {
+												"_CFURLString": {
+													"type": "string",
+													"title": "Path",
+													"description": "Path on the FileSystem to Application"
+												},
+												"_CFURLStringType": {
+													"type": "integer",
+													"title": "String Type",
+													"enum": [0],
+													"options": {
+														"enum_titles": ["Default"]
+													}
+												}
+											},
+											"required": [
+												"_CFURLString",
+												"_CFURLStringType"
+											]
+										},
+										"file-type": {
+											"type": "integer",
+											"title": "File Type",
+											"enum": [1],
+											"options": {
+												"enum_titles": ["Default"]
+											}
+										}
+									},
+									"required": [
+										"file-label",
+										"file-data",
+										"file-type"
+									]
+								}
+							}
+						}
+					}
+				],
+				"options": {
+					"infoText": "Persistant Application"
+				},
+				"links": [{
+					"rel": "More Information",
+					"href": ""
+				}]
+        },
+        "static-others": {
+            "title": "Persistent Items",
+			"description": "This list of items will appear on every user's dock on the right side next to the Trash. These items will also NOT be removable!",
+            "propertyOrder": 20,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Item",
+                        "properties": {
+                            "tile-type": {
+                                "type": "string",
+                                "title": "Item Type",
+                                "description": "The type of item you would like to use",
+                                "enum": ["file-tile", "url-tile", "directory-tile"],
+                                "options": {
+                                    "enum_titles": ["File", "URL", "Directory"]
+                                }
+                            },
+                            "tile-data": {
+                                "type": "object",
+                                "title": "Dock Item",
+                                "properties": {
+                                    "file-label": {
+                                        "type": "string",
+                                        "title": "Dock Item Name",
+                                        "description": "The name you'd like to display in the dock"
+                                    },
+                                    "file-data": {
+                                        "type": "object",
+                                        "title": "Dock Item Paramters",
+                                        "properties": {
+                                            "_CFURLString": {
+                                                "type": "string",
+                                                "title": "Path or URL",
+                                                "description": "Path on the FileSystem or URL to the Item"
+                                            },
+                                            "_CFURLStringType": {
+                                                "type": "integer",
+                                                "title": "String Type",
+                                                "enum": [0],
+                                                "options": {
+                                                    "enum_titles": ["Default"]
+                                                }
+                                            }
+                                        },
+                                        "required": [
+                                            "_CFURLString",
+                                            "_CFURLStringType"
+                                        ]
+                                    },
+                                    "file-type": {
+                                        "type": "integer",
+                                        "title": "File Type",
+                                        "enum": [1,2,3],
+                                        "options": {
+                                            "enum_titles": ["File","URL","Directory"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }]
+        },
+		"static-only": {
+			"title": "Persistent Apps/Items ONLY",
+            "description": "This will change the user's dock to only show the applications/items that are specified in this profile",
+            "propertyOrder": 30,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "default": false,
+        			"enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "contents-immutable": {
+            "title": "Allow modifying items in the Dock",
+            "description": "Prevent the user from ahving the ability to remove or add any item(s) to the Dock",
+            "properyOrder": 40,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "orientation": {
+            "title": "Dock Orientation",
+            "description": "Where the dock should appear on the screen",
+            "propertyOrder": 50,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "string",
+                    "default": "bottom",
+                    "enum": ["left", "bottom", "right"],
+                    "options": {
+                        "enum_titles": ["Left", "Bottom", "Right"]
+                    }
+                }]
+        },
+        "position-immutable": {
+            "title": "Position Immutable",
+            "description": "Prevent the user from changing the dock position and disable the buttons in System Preferences",
+            "propertyOrder": 60,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "autohide": {
+            "title": "Automatically Hide the Dock",
+            "description": "When true, the dock will be automatically hideen and shown depending on cursor position",
+            "propertyOrder": 70,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "autohide-immutable": {
+            "title": "Autohide CheckBox Disabled in System Preferences",
+            "description": "Prevent the user from having the ability to change the autohide setting",
+            "propertyOrder": 80,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "minimize-to-application": {
+            "title": "Minimize windows into the application icon",
+            "description": "Set this to true if you want applications to minimize into their icon",
+            "propertyOrder": 90,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "minimize-to-application-immutable": {
+            "title": "Minimize to Application CheckBox Disabled in System Preferences",
+            "description": "Prevent the user from having the ability to change the minimize to application setting",
+            "propertyOrder": 100,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "magnification": {
+            "title": "Magnification Enabled",
+            "description": "When true mangification will happen when the user mouses over an icon on the dock",
+            "propertyOrder": 110,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "magnify-immutable": {
+            "title": "Magnification CheckBox Disabled in System Preferences",
+            "description": "Prevent the user from having the ability to change the mangificaiton setting",
+            "propertyOrder": 120,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "largesize": {
+            "title": "Configure Magnification Size",
+            "description": "Set the largest magnification size in pixels",
+            "propertyOrder": 130,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "integer",
+                    "default": 128
+                }]
+        },
+        "magsize_immutable": {
+            "title": "Magnification Slider Disabled in System Preferences",
+            "description": "Prevent the user from having the ability to change the mangification size setting",
+            "propertyOrder": 140,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "show-process-indicators": {
+            "title": "Show indicators for applications currently open",
+            "description": "Set this to true if you would like to disaply the indicator underneath applications that are currently running",
+            "propertyOrder": 150,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "launchanim": {
+            "title": "Animate Opening Applications",
+            "description": "Set this to true if you would like applications to have animation when opening",
+            "propertyOrder": 160,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "launchanim-immutable": {
+            "title": "Animate opening Applications CheckBox Disabled in System Preferences",
+            "description": "Prevent the user from ahving the ability to change the animate application setting",
+            "propertyOrder": 170,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "mineffect": {
+            "title": "Minimize Window Effect",
+            "description": "The transition effect to use when applications are minimized to the Dock",
+            "propertyOrder": 180,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "string",
+                    "enum": ["genie", "scale"],
+                    "options": {
+                        "enum_titles": ["Genie Effect", "Scale Effect"]
+                    }
+                }]
+        },
+        "mineffect-immutable": {
+            "title": "Minimize Window Effect Dropdown Disabled in System Preferences",
+            "description": "Preven the user from having the ability to modify the Minimize Window Effect setting",
+            "properyOrder": 190,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "tilesize": {
+            "title": "Dock Size",
+            "description": "Dock Size in pixels",
+            "propertyOrder": 200,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "integer",
+                    "default": 64
+                }]
+        },
+        "size-immutable": {
+            "title": "Size Slider for Dock Disabled in System Preferences",
+            "description": "Prevent the user from having the ability to modify the dock size setting slider",
+            "properyOrder": 210,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "AllowDockFixupOverride": {
+            "title": "Allow DockFixup Override",
+            "description": "If true, use the file in /Library/Preferences/com.apple.dockfixup.plist when a new user or migrated user logs in. The format of this file currently has no documentation. This option has no effect for existing users. This option is ONLY VALID in macOS 10.12+!",
+            "properyOrder": 220,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        },
+        "show-recents": {
+            "title": "Show Recently Opened Applications",
+            "description": "When true, the last 3 applications that were opened will display after the pinned applications to the Dock but before the pinned Items and Trash Can. This option is ONLY VALID on macOS 10.14+!",
+            "properyOrder": 230,
+            "anyOf": [{
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "boolean",
+                    "enum": [false, true],
+                    "options": {
+                        "enum_titles": ["No", "Yes"]
+                    }
+                }]
+        }
+    }
+}
