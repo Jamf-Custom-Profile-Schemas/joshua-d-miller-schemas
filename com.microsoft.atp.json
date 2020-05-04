@@ -1,0 +1,406 @@
+{
+	"title": "Microsoft Defender ATP Settings",
+	"description": "Preference Domain: com.microsoft.wdav",
+	"__version": "1.0",
+	"__feedback": "josh@psu.edu",
+	"type": "object",
+	"options": {
+		"remove_empty_properties": true
+	},
+	"definitions": {
+		"policy_group": {
+			"type": "object",
+			"format": "grid",
+			"options": {
+				"collapsed": true,
+				"disable_properties": true
+			}
+		}
+	},
+	"properties": {
+		"antivirusengine": {
+			"title": "Antivirus Engine",
+			"description": "Configure different aspects of Microsoft Defender's Antivirus Engine",
+			"anyOf": [
+                {
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "object",
+					"properties": {
+						"enableRealTimeProtection": {
+							"title": "Enable Real-Time Protection",
+                            "propertyOrder": 10,
+							"anyOf": [{
+									"type": "null",
+									"title": "Not Configured"
+								},
+								{
+									"type": "boolean",
+									"title": "Configured"
+								}
+							],
+							"enum": [true, false],
+							"options": {
+								"enum_titles": ["Yes", "No"]
+							}
+						},
+                        "passiveMode": {
+                            "title": "Passive Mode",
+                            "description": "Specify whether the antivirus engine runs in passive mode.",
+                            "propertyOrder": 20,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "boolean",
+                                "title": "Configured",
+                                "enum": [true, false],
+                                "options": {
+                                    "enum_titles": ["Yes", "No"]
+                                }
+                            }]
+                        },
+                        "exlusionsMergePolicy": {
+                            "title": "Exclusion Policy",
+                            "description": "Specify the merge policy for exclusions. This can be a combination of administrator-defined and user-defined exclusions (merge) or only administrator-defined exclusions (admin_only). This setting can be used to restrict local users from defining their own exclusions.",
+                            "propertyOrder": 30,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "string",
+                                "title": "Configured",
+                                "enum": ["merge", "admin_only"],
+                                "options": {
+                                    "enum_titles": ["Merge", "Administrators Only"]
+                                }
+                            }]
+                        },
+                        "exclusions": {
+                            "title": "Exclusions",
+                            "description": "Specify entities excluded from being scanned. Exclusions can be specified by full paths, extensions, or file names.",
+                            "propertyOrder": 40,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "array",
+                                "title": "Configured",
+                                "items": {
+                                    "oneOf": [{
+                                        "type": "object",
+                                        "title": "Path",
+                                        "properties": {
+                                            "$type": {
+                                                "type": "string",
+                                                "title": "Type",
+                                                "enum": ["excludedPath"],
+                                                "options": {
+                                                    "enum_titles": ["Excluded Path"]
+                                                }
+                                            },
+                                            "path": {
+                                                "title": "Path",
+                                                "type": "string",
+                                                "description": "Indicate if the path property refers to a file or directory."
+                                            },
+                                            "isDirectory": {
+                                                "title": "Path is a Directory",
+                                                "type": "boolean",
+                                                "enum": [true, false],
+                                                "options": {
+                                                    "enum_titles": ["Yes", "No"]
+                                                }
+                                            }
+                                        },
+                                        "required": ["$type", "path", "isDirectory"]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "title": "File Extension",
+                                        "properties": {
+                                            "$type": {
+                                                "type": "string",
+                                                "title": "Type",
+                                                "enum": ["excludedFileExtension"],
+                                                "options": {
+                                                    "enum_titles": ["Excluded File Extension"]
+                                                }
+                                            },
+                                            "extension": {
+                                                "title": "The File Extension to exclude",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": ["$type", "extension"]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "title": "File Name",
+                                        "properties": {
+                                            "$type": {
+                                                "type": "string",
+                                                "title": "Type",
+                                                "enum": ["excludedFileName"],
+                                                "options": {
+                                                    "enum_titles": ["Excluded File Name"]
+                                                }
+                                            },
+                                            "name": {
+                                                "title": "Process Excluded from the scan",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": ["$type", "name"]
+                                    }]
+                                }
+                            }]
+                        },
+                        "allowedThreats": {
+                            "title": "Allowed threats",
+                            "description": "Specify threats by name that are not blocked by Microsoft Defender ATP for Mac. These threats will be allowed to run.",
+                            "propertyOrder": 50,
+                            "anyOf": [{
+                                    "type": "null",
+                                    "title": "Not Configured"
+                                },
+                                {
+                                    "title": "Configured",
+                                    "type": "string"
+                                }]
+                        },
+                        "disallowedThreatActions": {
+                            "title": "Disallowed Threat Actions",
+                            "description": "Restricts the actions that the local user of a device can take when threats are detected. The actions included in this list are not displayed in the user interface.",
+                            "propertyOrder": 60,
+                            "anyOf": [{
+                                    "type": "null",
+                                    "title": "Not Configured"
+                                },
+                                {
+                                    "title": "Configured",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "title": "Option",
+                                        "enum": ["allow", "restore"],
+                                        "options": {
+                                            "enum_titles": ["Allow", "Restore"]
+                                        }
+                                    },
+                                    "minItems": 1,
+                                    "maxItems": 2
+                                }]
+                        },
+                        "threatTypeSettings": {
+                            "title": "Threat type settings",
+                            "description": "Specify how certain threat types are handled by Microsoft Defender ATP for Mac.",
+                            "propertyOrder": 70,
+                            "anyOf": [{
+                                    "type": "null",
+                                    "title": "Not Configured"
+                                },
+                                {
+                                    "title": "Configured",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "enum": ["potentially_unwanted_applications", "archive_bomb"],
+                                                "options": {
+                                                    "enum_titles": ["Potentionally Unwanted Applications", "Archive Bomb"]
+                                                }
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "enum": ["audit", "block", "off"],
+                                                "options": {
+                                                    "enum_titles": ["Audit", "Block", "Off"]
+                                                }
+                                            }
+                                        },
+                                        "uniqueItems": true,
+                                        "minItems": 1,
+                                        "maxItems": 2,
+                                        "required": ["key", "value"]
+                                    }
+                                }
+                            ]
+                        },
+                        "threatTypeSettingsMergePolicy": {
+                            "title": "Threat type settings merge policy",
+                            "description": "Specify the merge policy for threat type settings. This can be a combination of administrator-defined and user-defined settings (merge) or only administrator-defined settings (admin_only). This setting can be used to restrict local users from defining their own settings for different threat types.",
+                            "propertyOrder": 80,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "string",
+                                "title": "Configured",
+                                "enum": ["merge", "admin_only"],
+                                "options": {
+                                    "enum_titles": ["Merge", "Administrators Only"]
+                                }
+                            }]
+                        }
+                    }
+                }
+            ]
+        },
+        "cloudService": {
+            "title": "Cloud-delivered protection preferences",
+            "description": "Configure the cloud-driven protection features of Microsoft Defender ATP for Mac.",
+            "propertyOrder": 90,
+            "anyOf": [
+                {
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "object",
+					"properties": {
+                        "enabled": {
+                            "title": "Enable / Disable cloud-delivered protection",
+                            "description": "Specify whether to enable cloud-delivered protection the device or not. To improve the security of your services, we recommend keeping this feature turned on.",
+                            "propertyOrder": 100,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "boolean",
+                                "title": "Configured",
+                                "enum": [true, false],
+                                "options": {
+                                    "enum_titles": ["Yes", "No"]
+                                }
+                            }]
+                        },
+                        "diagnosticLevel": {
+                            "title": "Diagnostic collection level",
+                            "description": "Diagnostic data is used to keep Microsoft Defender ATP secure and up-to-date, detect, diagnose and fix problems, and also make product improvements. This setting determines the level of diagnostics sent by Microsoft Defender ATP to Microsoft.",
+                            "propertyOrder": 110,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "string",
+                                "title": "Configured",
+                                "enum": ["optional", "required"],
+                                "options": {
+                                    "enum_titles": ["Optional", "Required"]
+                                }
+                            }]
+                        },
+                        "automaticSampleSubmission": {
+                            "title": "Enable / Disable automatic sample submissions",
+                            "description": "Determines whether suspicious samples (that are likely to contain threats) are sent to Microsoft. You are prompted if the submitted file is likely to contain personal information.",
+                            "propertyOrder": 120,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "boolean",
+                                "title": "Configured",
+                                "enum": [true, false],
+                                "options": {
+                                    "enum_titles": ["Yes", "No"]
+                                }
+                            }]
+                        }
+                    }
+                }]
+        },
+        "userInterface": {
+            "title": "User interface preferences",
+            "description": "Manage the preferences for the user interface of Microsoft Defender ATP for Mac.",
+            "propertyOrder": 130,
+            "anyOf": [
+                {
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "object",
+                    "properties": {
+                        "hideStatusMenuIcon": {
+                            "title": "Show / Hide status menu icon",
+                            "description": "Specify whether to show or hide the status menu icon in the top-right corner of the screen.",
+                            "propertyOrder": 140,
+                            "anyOf": [{
+                                "type": "null",
+                                "title": "Not Configured"
+                            },
+                            {
+                                "type": "boolean",
+                                "title": "Configured",
+                                "enum": [true, false],
+                                "options": {
+                                    "enum_titles": ["Hide", "Show"]
+                                }
+                            }]
+                        }
+                    }
+                }]
+        },
+        "edr": {
+            "title": "Endpoint detection and response preferences",
+            "description": "Manage the preferences of the endpoint detection and response (EDR) component of Microsoft Defender ATP for Mac.",
+            "propertyOrder": 150,
+            "anyOf": [
+                {
+                    "type": "null",
+                    "title": "Not Configured"
+                },
+                {
+                    "title": "Configured",
+                    "type": "object",
+                    "properties": {
+                        "tags": {
+                            "title": "Device tags",
+                            "description": "Specify a tag name and its value.",
+                            "propertyOrder": 160,
+                            "anyOf": [
+                                {
+                                    "type": "null",
+                                    "title": "Not Configured"
+                                },
+                                {
+                                    "title": "Configured",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Tag",
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "Type of tag",
+                                                "description": "Specifies the type of tag"
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "title": "Value of tag",
+                                                "description": "Specifies the value of tag"
+                                            }
+                                        }
+                                    }
+                                }]
+                        }
+                    }
+                }]
+        }
+	}
+}

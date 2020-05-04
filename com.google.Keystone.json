@@ -1,0 +1,51 @@
+{
+    "title": "Google Keystone Settings",
+    "description": "Preference Domain: com.google.keystone",
+    "__version": "1.0",
+    "__feedback": "josh@psu.edu",
+    "type": "object",
+    "options": {
+        "remove_empty_properties": true
+    },
+    "definitions": {
+        "policy_group": {
+            "type": "object",
+            "format": "grid",
+            "options": {
+                "collapsed": true,
+                "disable_properties": true
+            }
+        }
+    },
+    "properties": {
+        "updatePolicies": {
+            "title": "Update Policies",
+			"propertyOrder": 10,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "object",
+					"properties": {
+                        "global": {
+                            "title": "Global",
+                            "type": "object",
+                            "properties": {
+                                "UpdateDefault": {
+                                    "title": "Default Style of Update",
+                                    "decription": "Type of update style to use. 0 for automatic, 1 for install on update checks, 2 for manual only and 3 for never",
+                                    "type": "integer",
+                                    "enum": [0, 1, 2, 3],
+                                    "options": {
+                                        "enum_titles": ["Automatic", "Scheduled", "Manual", "Never"]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }]
+        }
+    }
+}

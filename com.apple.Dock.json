@@ -33,6 +33,12 @@
 						"type": "object",
 						"title": "Application",
 						"properties": {
+                            "mcx_typehint": {
+                                "type": "integer",
+                                "title": "MCX_TypeHint",
+                                "description": "Position on the dock",
+                                "default": 1
+                            },
 							"tile-type": {
 								"type": "string",
 								"title": "Tile-Type",
