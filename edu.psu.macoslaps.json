@@ -133,7 +133,7 @@
     	},
         "FirstPass": {
             "title": "First Password",
-            "description": "Enter the password intially set to your administratory account that you want to use with LAPS that was created with a secureToken",
+            "description": "Enter the password intially set to your administrator account that you want to use with LAPS that was created with a secureToken",
             "propertyOrder": 80,
             "anyOf": [{
                     "type": "null",

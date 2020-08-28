@@ -1,0 +1,109 @@
+{
+	"title": "Notification Settings",
+	"description": "Preference Domain: com.apple.notificationsettings",
+	"__version": "1.0",
+	"__feedback": "josh@psu.edu",
+	"type": "object",
+	"options": {
+		"remove_empty_properties": true
+	},
+	"definitions": {
+		"policy_group": {
+			"type": "object",
+			"format": "grid",
+			"options": {
+				"collapsed": true,
+				"disable_properties": true
+			}
+		}
+	},
+	"properties": {
+        "NotificationSettings": {
+            "title": "Notification Settings",
+			"description": "Configure Notification Settings for macOS Applications in Catalina (10.15) or higher",
+			"anyOf": [
+                {
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "array",
+					"items": {
+                        "type": "object",
+						"title": "Application",
+						"properties": {
+                            "AlertType": {
+                                "type": "integer",
+                                "title": "Alert Type",
+                                "enum": [0, 1, 2],
+								"options": {
+									"enum_titles": ["None", "Banners", "Alerts"]
+								}
+                            },
+                            "BadgesEnabled": {
+                                "type": "boolean",
+                                "title": "Use Badges on App Icon",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            },
+                            "BundleIdentifier": {
+                                "type": "string",
+                                "title": "Application Identifier",
+                                "description": "The bundle identifier of the application"
+                            },
+                            "CriticalAlertsEnabled": {
+                                "type": "boolean",
+                                "title": "Critical Alerts",
+                                "descriptions": "Display Critical Alerts",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            },
+                            "NotificationsEnabled": {
+                                "type": "boolean",
+                                "title": "Enable Notifications",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            },
+                            "ShowInLockScreen": {
+                                "type": "boolean",
+                                "title": "Show Notifications on Lock Screen",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            },
+                            "ShowInNotificationCenter": {
+                                "type": "boolean",
+                                "title": "Display Notifications in Notification Center",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            },
+                            "SoundsEnabled": {
+                                "type": "boolean",
+                                "title": "Play sound when notification arrives",
+                                "enum": [false, true],
+                                "default": false,
+                                "options": {
+                                    "enum_titles": ["No", "Yes"]
+                                }
+                            }
+                        }
+                    }
+                }]
+        }
+    }
+}
