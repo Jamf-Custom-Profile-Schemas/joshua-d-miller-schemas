@@ -1,7 +1,7 @@
 {
 	"title": "macOSLAPS Settings",
 	"description": "Preference Domain: edu.psu.macoslaps",
-	"__version": "1.0",
+	"__version": "2.0.0",
 	"__feedback": "josh@psu.edu",
 	"type": "object",
 	"options": {
@@ -62,10 +62,40 @@
 			],
             "default": 12
 		},
+		"PasswordGrouping": {
+			"title": "Length of each group of characters in password.",
+			"description": "Like Safari Style passwords, you can specify how many characters are used between each of the separators",
+			"propertyOrder": 40,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "integer"
+				}
+			],
+            "default": 0
+		},
+		"PasswordSeparator": {
+			"title": "Password Separator to use",
+			"description": "Sepcify what string character you would like to use to sepearte each character group of passwords. Safari default and macOSLAPS defaults is -",
+			"propertyOrder": 50,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "string"
+				}
+			],
+            "default": "-"
+		},
 		"RemoveKeychain": {
 			"title": "Remove the keychain for the local administrator",
 			"description": "If set to Yes, the keychain for the local adminsitrator will be deleted once the password has been changed (Default is Yes)",
-			"propertyOrder": 40,
+			"propertyOrder": 60,
 			"anyOf": [{
 					"type": "null",
 					"title": "Not Configured"
@@ -84,7 +114,7 @@
 		"RemovePassChars": {
 			"title": "Remove these characters from the generated password",
 			"description": "Any characters defined in this field will be removed from any generated password",
-			"propertyOrder": 50,
+			"propertyOrder": 70,
 			"anyOf": [{
 					"type": "null",
 					"title": "Not Configured"
@@ -98,7 +128,7 @@
 		"ExclusionSets": {
 			"title": "Sets of characters to exclude",
 			"description": "Any options defined here will remove that entire set of charcters from any generated password",
-			"propertyOrder": 60,
+			"propertyOrder": 80,
 			"anyOf": [{
 					"type": "null",
 					"title": "Not Configured"
@@ -120,7 +150,7 @@
     	"PreferredDC": {
     		"title": "Preferred Domain Controller",
     		"description": "If defined, this server will be used when performing password changes. Useful when you have RODC (Read Only Domain Controllers)",
-    		"propertyOrder": 70,
+    		"propertyOrder": 90,
     		"anyOf": [{
     				"type": "null",
     				"title": "Not Configured"
@@ -134,7 +164,7 @@
         "FirstPass": {
             "title": "First Password",
             "description": "Enter the password intially set to your administrator account that you want to use with LAPS that was created with a secureToken",
-            "propertyOrder": 80,
+            "propertyOrder": 100,
             "anyOf": [{
                     "type": "null",
                     "title": "Not Configured"
@@ -144,6 +174,28 @@
                     "type": "string"
                 }
             ]
-        }
+        },
+		"Method": {
+			"title": "Method",
+			"description": "Select the preferred method to utilize macOSLAPS",
+			"propertyOrder": 1100,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "string",
+					"items": {
+                        "type": "string",
+						"default": "AD",
+                        "enum": ["AD", "Local"],
+                        "options": {
+                            "enum_titles": ["Active Directory", "Local"]
+                        }
+                    },
+					"minItems": 1
+                }]
+		}
     }
 }
