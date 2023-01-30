@@ -1,8 +1,8 @@
 {
 	"title": "macOSLAPS Settings",
 	"description": "Preference Domain: edu.psu.macoslaps",
-	"__version": "2.0.0",
-	"__feedback": "josh@psu.edu",
+	"__version": "3.0.2",
+	"__feedback": "josh.miller@outlook.com",
 	"type": "object",
 	"options": {
 		"remove_empty_properties": true
@@ -30,7 +30,8 @@
 					"title": "Configured",
 					"type": "string"
 				}
-			]
+			],
+			"default": "admin"
 		},
 		"DaysTillExpiration": {
 			"title": "Days till Expiration of LAPS Password",
@@ -196,6 +197,41 @@
                     },
 					"minItems": 1
                 }]
+		},
+		"PasswordRequirements": {
+			"title": "Password Requirements",
+			"description": "Specify in a dictionary what requirements you would like the password to have",
+			"propertyOrder": 1200,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "object",
+					"properties": {
+						"Lowercase": {
+							"type": "integer",
+							"title": "Lowercase Letters",
+							"description": "Amount of Lowercase Letters"
+						},
+						"Uppercase": {
+							"type": "integer",
+							"title": "Uppercase Letters",
+							"description": "Amount of Uppercase Letters"
+						},
+						"Number": {
+							"type": "integer",
+							"title": "Numbers",
+							"description": "Amount of Numbers"
+						},
+						"Symbol": {
+							"type": "integer",
+							"title": "Symbols",
+							"description": "Amount of Symbols"
+						}
+					}
+				}]
 		}
     }
 }
