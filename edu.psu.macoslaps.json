@@ -9,11 +9,11 @@
 	},
 	"definitions": {
 		"policy_group": {
-			"type": "object",
-			"format": "grid",
-			"options": {
-				"collapsed": true,
-				"disable_properties": true
+		"type": "object",
+		"format": "grid",
+		"options": {
+			"collapsed": true,
+			"disable_properties": true
 			}
 		}
 	},
@@ -23,14 +23,13 @@
 			"description": "The account name of the local administrator account you would like to use with LAPS",
 			"propertyOrder": 10,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "string"
-				}
-			],
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}],
 			"default": "admin"
 		},
 		"DaysTillExpiration": {
@@ -38,156 +37,148 @@
 			"description": "The amount of time in days until the password is expired and will change on a check-in (Default is 60 days)",
 			"propertyOrder": 20,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "integer"
-				}
-			],
-            "default": 60
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "integer"
+			}],
+			"default": 60
 		},
 		"PasswordLength": {
 			"title": "Length of the generated Password",
 			"description": "How long the generated password will be (Default is 12 characters)",
 			"propertyOrder": 30,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "integer"
-				}
-			],
-            "default": 12
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "integer"
+			}],
+			"default": 12
 		},
 		"PasswordGrouping": {
 			"title": "Length of each group of characters in password.",
 			"description": "Like Safari Style passwords, you can specify how many characters are used between each of the separators",
 			"propertyOrder": 40,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "integer"
-				}
-			],
-            "default": 0
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "integer"
+			}],
+			"default": 0
 		},
 		"PasswordSeparator": {
 			"title": "Password Separator to use",
 			"description": "Sepcify what string character you would like to use to sepearte each character group of passwords. Safari default and macOSLAPS defaults is -",
 			"propertyOrder": 50,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "string"
-				}
-			],
-            "default": "-"
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}],
+			"default": "-"
 		},
 		"RemoveKeychain": {
 			"title": "Remove the keychain for the local administrator",
 			"description": "If set to Yes, the keychain for the local adminsitrator will be deleted once the password has been changed (Default is Yes)",
 			"propertyOrder": 60,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "boolean"
-				}
-			],
-            "default": true,
-            "enum": [false, true],
-            "options": {
-                "enum_titles": ["No", "Yes"]
-            }
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "boolean"
+			}],
+			"default": true,
+			"enum": [false, true],
+			"options": {
+				"enum_titles": ["No", "Yes"]
+			}
 		},
 		"RemovePassChars": {
 			"title": "Remove these characters from the generated password",
 			"description": "Any characters defined in this field will be removed from any generated password",
 			"propertyOrder": 70,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "string"
-				}
-			]
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}]
 		},
 		"ExclusionSets": {
 			"title": "Sets of characters to exclude",
 			"description": "Any options defined here will remove that entire set of charcters from any generated password",
 			"propertyOrder": 80,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "array",
-					"items": {
-                        "type": "string",
-                        "enum": ["letters", "numbers", "symbols"],
-                        "options": {
-                            "enum_titles": ["Letters", "Numbers", "Symbols"]
-                        }
-                    },
-					"minItems": 1,
-                    "maxItems": 3
-                }]
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "array",
+			"items": {
+				"type": "string",
+				"enum": ["letters", "numbers", "symbols"],
+				"options": {
+					"enum_titles": ["Letters", "Numbers", "Symbols"]
+				}
+			},
+				"minItems": 1,
+				"maxItems": 3
+			}]
 		},
 		"PreferredDC": {
 			"title": "Preferred Domain Controller",
 			"description": "If defined, this server will be used when performing password changes. Useful when you have RODC (Read Only Domain Controllers)",
 			"propertyOrder": 90,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "string"
-				}
-			]
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}]
 		},
-        "FirstPass": {
-            "title": "First Password",
-            "description": "Enter the password intially set to your administrator account that you want to use with LAPS that was created with a secureToken",
-            "propertyOrder": 100,
-            "anyOf": [{
-                    "type": "null",
-                    "title": "Not Configured"
-                },
-                {
-                    "title": "Configured",
-                    "type": "string"
-                }
-            ]
-        },
+		"FirstPass": {
+			"title": "First Password",
+			"description": "Enter the password intially set to your administrator account that you want to use with LAPS that was created with a secureToken",
+			"propertyOrder": 100,
+			"anyOf": [{
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}]
+		},
 		"Method": {
 			"title": "Method",
 			"description": "Select the preferred method to utilize macOSLAPS",
 			"propertyOrder": 110,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "string"
-                }],
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "string"
+			}],
 			"default": "AD",
 			"enum": ["AD", "Local"],
 			"options": {
@@ -199,35 +190,35 @@
 			"description": "Specify in a dictionary what requirements you would like the password to have",
 			"propertyOrder": 120,
 			"anyOf": [{
-					"type": "null",
-					"title": "Not Configured"
-				},
-				{
-					"title": "Configured",
-					"type": "object",
-					"properties": {
-						"Lowercase": {
-							"type": "integer",
-							"title": "Lowercase Letters",
-							"description": "Amount of Lowercase Letters"
-						},
-						"Uppercase": {
-							"type": "integer",
-							"title": "Uppercase Letters",
-							"description": "Amount of Uppercase Letters"
-						},
-						"Number": {
-							"type": "integer",
-							"title": "Numbers",
-							"description": "Amount of Numbers"
-						},
-						"Symbol": {
-							"type": "integer",
-							"title": "Symbols",
-							"description": "Amount of Symbols"
-						}
+				"type": "null",
+				"title": "Not Configured"
+			},
+			{
+				"title": "Configured",
+				"type": "object",
+				"properties": {
+					"Lowercase": {
+						"type": "integer",
+						"title": "Lowercase Letters",
+						"description": "Amount of Lowercase Letters"
+					},
+					"Uppercase": {
+						"type": "integer",
+						"title": "Uppercase Letters",
+						"description": "Amount of Uppercase Letters"
+					},
+					"Number": {
+						"type": "integer",
+						"title": "Numbers",
+						"description": "Amount of Numbers"
+					},
+					"Symbol": {
+						"type": "integer",
+						"title": "Symbols",
+						"description": "Amount of Symbols"
 					}
-				}]
+				}
+			}]
 		}
-    }
+	}
 }
