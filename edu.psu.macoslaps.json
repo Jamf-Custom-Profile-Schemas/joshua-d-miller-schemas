@@ -1,7 +1,7 @@
 {
 	"title": "macOSLAPS Settings",
 	"description": "Preference Domain: edu.psu.macoslaps",
-	"__version": "3.0.2",
+	"__version": "3.0.4",
 	"__feedback": "josh.miller@outlook.com",
 	"type": "object",
 	"options": {
@@ -147,21 +147,21 @@
 					"minItems": 1,
                     "maxItems": 3
                 }]
-    	},
-    	"PreferredDC": {
-    		"title": "Preferred Domain Controller",
-    		"description": "If defined, this server will be used when performing password changes. Useful when you have RODC (Read Only Domain Controllers)",
-    		"propertyOrder": 90,
-    		"anyOf": [{
-    				"type": "null",
-    				"title": "Not Configured"
-    			},
-    			{
-    				"title": "Configured",
-    				"type": "string"
-    			}
-    		]
-    	},
+		},
+		"PreferredDC": {
+			"title": "Preferred Domain Controller",
+			"description": "If defined, this server will be used when performing password changes. Useful when you have RODC (Read Only Domain Controllers)",
+			"propertyOrder": 90,
+			"anyOf": [{
+					"type": "null",
+					"title": "Not Configured"
+				},
+				{
+					"title": "Configured",
+					"type": "string"
+				}
+			]
+		},
         "FirstPass": {
             "title": "First Password",
             "description": "Enter the password intially set to your administrator account that you want to use with LAPS that was created with a secureToken",
@@ -179,29 +179,25 @@
 		"Method": {
 			"title": "Method",
 			"description": "Select the preferred method to utilize macOSLAPS",
-			"propertyOrder": 1100,
+			"propertyOrder": 110,
 			"anyOf": [{
 					"type": "null",
 					"title": "Not Configured"
 				},
 				{
 					"title": "Configured",
-					"type": "string",
-					"items": {
-                        "type": "string",
-						"default": "AD",
-                        "enum": ["AD", "Local"],
-                        "options": {
-                            "enum_titles": ["Active Directory", "Local"]
-                        }
-                    },
-					"minItems": 1
-                }]
+					"type": "string"
+                }],
+			"default": "AD",
+			"enum": ["AD", "Local"],
+			"options": {
+				"enum_titles": ["Active Directory", "Local"]
+			}
 		},
 		"PasswordRequirements": {
 			"title": "Password Requirements",
 			"description": "Specify in a dictionary what requirements you would like the password to have",
-			"propertyOrder": 1200,
+			"propertyOrder": 120,
 			"anyOf": [{
 					"type": "null",
 					"title": "Not Configured"
